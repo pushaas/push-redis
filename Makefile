@@ -1,8 +1,13 @@
 CONTAINER := push-redis
 IMAGE := rafaeleyng/$(CONTAINER)
 IMAGE_TAGGED := $(IMAGE):latest
+NETWORK := push-service-network
 PORT_CONTAINER := 6379
 PORT_HOST := 6380
+
+.PHONY: docker-create-network
+docker-create-network:
+	@-docker network create $(NETWORK)
 
 .PHONY: docker-build
 docker-build:
@@ -15,10 +20,11 @@ docker-clean:
 	@-docker rm -f $(CONTAINER)
 
 .PHONY: docker-run
-docker-run: docker-clean
+docker-run: docker-clean docker-create-network
 	@docker run \
 		-d \
 		--name $(CONTAINER) \
+		--network $(NETWORK) \
 		-p $(PORT_HOST):$(PORT_CONTAINER) \
 		-v push-redis-data:/data \
 		$(IMAGE_TAGGED)
