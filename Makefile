@@ -1,6 +1,7 @@
+TAG := latest
 CONTAINER := push-redis
 IMAGE := rafaeleyng/$(CONTAINER)
-IMAGE_TAGGED := $(IMAGE):latest
+IMAGE_TAGGED := $(IMAGE):$(TAG)
 NETWORK := push-service-network
 PORT_CONTAINER := 6379
 PORT_HOST := 6380
