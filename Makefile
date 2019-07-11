@@ -13,7 +13,7 @@ docker-create-network:
 .PHONY: docker-build
 docker-build:
 	@docker build \
-		-t $(IMAGE) \
+		-t $(IMAGE_TAGGED) \
 		.
 
 .PHONY: docker-clean
@@ -36,4 +36,4 @@ docker-build-and-run: docker-build docker-run
 .PHONY: docker-push
 docker-push: docker-build
 	@docker push \
-		$(IMAGE)
+		$(IMAGE_TAGGED)
