@@ -8,7 +8,6 @@ PORT_HOST := 6379
 
 .PHONY: docker-create-network
 docker-create-network:
-	@-docker network rm $(NETWORK)
 	@-docker network create $(NETWORK)
 
 .PHONY: docker-build
