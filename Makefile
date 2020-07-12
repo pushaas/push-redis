@@ -1,6 +1,6 @@
 TAG := latest
 CONTAINER := push-redis
-IMAGE := rafaeleyng/$(CONTAINER)
+IMAGE := pushaas/$(CONTAINER)
 IMAGE_TAGGED := $(IMAGE):$(TAG)
 NETWORK := push-service-network
 PORT_CONTAINER := 6379
@@ -8,6 +8,7 @@ PORT_HOST := 6379
 
 .PHONY: docker-create-network
 docker-create-network:
+	@-docker network rm $(NETWORK)
 	@-docker network create $(NETWORK)
 
 .PHONY: docker-build
